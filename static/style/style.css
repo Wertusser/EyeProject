@@ -1,0 +1,68 @@
+.hdr_tmbn {
+    position: relative;
+    height: 700px ;
+    width: 100%;
+    background-color: #060606;
+}
+
+.navbar-header {
+    margin-left: 15px;
+}
+
+.image_container {
+    position: absolute;
+    height: inherit;
+    width: 100%;
+    background-image:url('../img/Backlit_keyboard.jpg');
+    background-size: cover;
+    background-position: center;
+    -webkit-filter: blur(8px);
+    -moz-filter: blur(8px);
+    filter: blur(8px);
+    z-index: 1;
+}
+
+.jbtr {
+    margin: 0 auto;
+    border-radius: 15px;
+    position: absolute;
+    bottom: 200px;
+    z-index: 2;
+    background-color: transparent;
+    left: calc(50vw - (322.156px / 2)); 
+}
+
+body {
+    background-color:#060606 ;
+    height: 700;
+    
+}
+.bottomline {
+    position: absolute;
+    bottom: 56.5px;
+    width: 100%;
+    height: 20px;
+    background-color: black;
+}
+
+.form-group {
+    position: absolute;
+    width: 500px;
+    top: 420px;
+    left:calc(50vw - (500px / 2));
+}
+
+.glyphicons-search {
+    height: 24px;
+    width: 24px;
+    background-image: url(../img/glyphicons-28-search.png);
+    background-size: cover;
+}
+
+footer{
+    position: absolute;
+    
+    width: 100%;
+    height:50px;
+    background-color: black;
+}
