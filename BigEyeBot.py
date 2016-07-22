@@ -4,10 +4,10 @@ from adapters import infoVk
 
 ######  Main loop ######
 
-def main():
-    a=datetime.datetime.now()
-    print(datetime.datetime.now()-a)
+def example():
+    info = infoVk('put here vk id')
+    print(info.getInfo())
 
 
 if __name__ == '__main__':
-    main()
+    example()
