@@ -8,7 +8,41 @@ from adapters.transliter import translit
 class infoVk:
     def __init__(self,person_id):
         self.person_id = person_id
+        if self.person_id[0].isdigit():
+            pass
+        else:
+            self.person_id = infoVk.getAbout(person_id)[0]['uid']
+            
 
+    def getInfo(self):
+        person_id = self.person_id
+        about = infoVk.getAbout(person_id)
+        try:
+            wall = infoVk.getWall(person_id)
+        except Exception:
+            return {'person_id':person_id,'access':'denied'}
+        geo = infoVk.getLocFromWall(wall)
+        loc =[] + infoVk.getLocFromPhotos(person_id)
+        for i in range(0,len(geo)):
+            loc.append(float(geo[i][0]))
+            loc.append(float(geo[i][1]))
+        SomeUseful = infoVk.getTextFromWall(wall)
+        urls = []
+        for i in range(len(SomeUseful)):
+            urls += re.findall(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+',SomeUseful[i])
+        if 'instagram' in about[0]:
+            nicknames = about[0]['instagram']
+        elif about[0]['screen_name'].startswith('id'):
+            nicknames = infoVk.getNicknames(urls,person_id)
+        else:
+            nicknames = about[0]['screen_name']
+        allData = infoVk.createDict(person_id,about,loc,urls,nicknames,access="accept")
+        try:
+            return allData
+        except:
+            pass
+
+    @staticmethod
     def getAbout(person_id):
         session = vk.Session()
         api = vk.API(session)
@@ -97,34 +131,6 @@ class infoVk:
         d['Nicknames'] = nicknames
         d['access'] = access
         return d
-
-    def getInfo(self):
-        person_id = self.person_id
-        about = infoVk.getAbout(person_id)
-        try:
-            wall = infoVk.getWall(person_id)
-        except Exception:
-            return {'person_id':person_id,'access':'denied'}
-        geo = infoVk.getLocFromWall(wall)
-        loc =[] + infoVk.getLocFromPhotos(person_id)
-        for i in range(0,len(geo)):
-            loc.append(float(geo[i][0]))
-            loc.append(float(geo[i][1]))
-        SomeUseful = infoVk.getTextFromWall(wall)
-        urls = []
-        for i in range(len(SomeUseful)):
-            urls += re.findall(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+',SomeUseful[i])
-        if 'instagram' in about[0]:
-            nicknames = about[0]['instagram']
-        elif about[0]['screen_name'].startswith('id'):
-            nicknames = infoVk.getNicknames(urls,person_id)
-        else:
-            nicknames = about[0]['screen_name']
-        allData = infoVk.createDict(person_id,about,loc,urls,nicknames,access="accept")
-        try:
-            return allData
-        except:
-            pass
 
     def getTextFromWall(wall):
         '''Get useful text from vk wall.
