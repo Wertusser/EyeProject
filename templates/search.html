@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block body %}
+    <div>
+    <ul>
+        {% if info['access'] == 'accept' %}
+            {% for item in info.keys() %}
+                <li>{{ info[item] }}</li>
+            {% endfor %}
+        {% endif %}
+    </ul>
+    </div>
+{% endblock %}
