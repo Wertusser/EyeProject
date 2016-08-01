@@ -48,4 +48,5 @@ def index():
 
 @app.route('/search/<client_id>')
 def get_info(client_id):
-    return infoVk(str(client_id)).getInfo()
+     info= infoVk(str(client_id)).getInfo()
+     return render_template('search.html' info=info)
