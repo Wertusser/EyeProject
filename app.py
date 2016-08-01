@@ -1,4 +1,5 @@
 import os
+from adapters import infoVk
 import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash
@@ -45,6 +46,6 @@ def initdb_command():
 def index():
     return render_template('index.html')
 
-@app.route('/search', methods=['POST'])
-def get_id():
-    return None
+@app.route('/search/<client_id>')
+def get_info(client_id):
+    return infoVk(str(client_id)).getInfo()
