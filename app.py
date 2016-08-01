@@ -40,7 +40,7 @@ def init_db():
 def initdb_command():
     """Initializes the database."""
     init_db()
-    print 'Initialized the database.'
+    print('Initialized the database.')
 
 @app.route('/')
 def index():
