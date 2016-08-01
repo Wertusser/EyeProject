@@ -46,7 +46,7 @@ class infoVk:
     def getAbout(person_id):
         session = vk.Session()
         api = vk.API(session)
-        about = api.users.get(user_ids = person_id, fields = 'screen_name, status, domain, site, contacts, bdate, connections')
+        about = api.users.get(user_ids = person_id, fields = 'photo_200_orig, screen_name, status, domain, site, contacts, bdate, connections')
         return about
 
     def getWall(person_id):
